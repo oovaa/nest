@@ -4,9 +4,6 @@ import { NingasService } from './ningas.service';
 
 @Module({
   controllers: [NingasController],
-  providers: [NingasService]
+  providers: [NingasService],
 })
-export class NingasModule {
-
-    
-}
+export class NingasModule {}

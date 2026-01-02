@@ -1,26 +1,44 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+
+const users: CreateUserDto[] = [];
 
 @Injectable()
 export class UsersService {
   create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+    createUserDto.id = users.length + 1;
+    users.push(createUserDto);
+    return createUserDto;
   }
 
   findAll() {
-    return `This action returns all users`;
+    return users;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    const user = users.find((x) => x.id === id);
+    if (!user) {
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+    return user;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+    const idx = users.findIndex((u) => u.id === id);
+    if (idx === -1) {
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+    users[idx] = { ...users[idx], ...updateUserDto, id };
+    return users[idx];
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    const idx = users.findIndex((u) => u.id === id);
+    if (idx === -1) {
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+    const [removed] = users.splice(idx, 1);
+    return removed;
   }
 }
