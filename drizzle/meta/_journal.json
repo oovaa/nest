@@ -15,6 +15,20 @@
       "when": 1767524680186,
       "tag": "0001_bouncy_runaways",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1767534739051,
+      "tag": "0002_clumsy_katie_power",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1767534831979,
+      "tag": "0003_tidy_payback",
+      "breakpoints": true
     }
   ]
 }

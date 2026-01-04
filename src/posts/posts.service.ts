@@ -2,8 +2,9 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { DATABASE_CONNECTION } from 'src/drizzle/drizzle.connection';
-import * as schema from './schema';
+import * as schema from '../users/schema';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import { eq } from 'drizzle-orm';
 @Injectable()
 export class PostsService {
   constructor(
@@ -14,16 +15,30 @@ export class PostsService {
     return this.database.insert(schema.posts).values(createPostDto);
   }
 
-  findAll() {
-    return this.database.query.posts.findMany({ with: { user: true } });
+  async findAll() {
+    return await this.database.query.posts.findMany({
+      where: eq(schema.posts.id, 1),
+      with: { user: true, post_to_catagories: true },
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} post`;
+    return this.database.query.posts.findFirst({
+      where: eq(schema.posts.id, id),
+      with: {
+        post_to_catagories: true,
+        user: true,
+      },
+    });
   }
 
-  update(id: number, updatePostDto: UpdatePostDto) {
-    return `This action updates a #${id} post`;
+  update(id: number, content: string) {
+    console.log(content);
+
+    return this.database
+      .update(schema.posts)
+      .set({ content: content })
+      .where(eq(schema.posts.id, id));
   }
 
   remove(id: number) {
