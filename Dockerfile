@@ -1,23 +1,16 @@
 
-FROM oven/bun:latest AS builder
+FROM oven/bun:latest
 WORKDIR /app
 
-# Install deps
-# Copy lockfiles so Bun uses `bun.lock` instead of migrating from package-lock.json
+# Development image: install all deps and run Nest in watch mode
+ENV NODE_ENV=development
+
+# Copy lockfiles first for deterministic install
 COPY package.json package-lock.json bun.lock ./
 RUN bun install
 
-# Build
+# Copy source
 COPY . .
-RUN bun run build
-
-FROM oven/bun:latest AS runner
-WORKDIR /app
-ENV NODE_ENV=production
-
-# Copy built app and node_modules from builder (no install step needed)
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
 
 EXPOSE 3000
-CMD ["bun", "run", "start:prod-bun"]
+CMD ["bun", "run", "start:dev"]
