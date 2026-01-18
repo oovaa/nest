@@ -15,11 +15,11 @@ ENV NODE_ENV=production
 
 # Install only production deps
 COPY package*.json ./
-RUN bun install --production
+RUN bun install
 
 # Copy build and modules
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 
 EXPOSE 3000
-CMD ["bun", "run", "start:prod-bun"]
+CMD ["bun", "run", "start:prod"]
