@@ -25,9 +25,7 @@ import { ProducerService } from './producer/producer.service';
         name: 'RABBITMQ_SERVICE', // Injection token
         transport: Transport.RMQ,
         options: {
-          urls: [
-            `amqp://guest:guest@${process.env.RMQHOST || 'localhost'}:5672`,
-          ],
+          urls: [process.env.RABBITMQ_URL!],
           queue: 'sse_stream_queue',
           queueOptions: {
             durable: false,
