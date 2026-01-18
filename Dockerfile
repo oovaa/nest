@@ -1,16 +1,21 @@
-
 FROM oven/bun:latest
+
 WORKDIR /app
 
-# Development image: install all deps and run Nest in watch mode
-ENV NODE_ENV=development
+# Set to production for the final image
+ENV NODE_ENV=production
 
-# Copy lockfiles first for deterministic install
+# Copy dependency files first to leverage Docker caching
 COPY package.json package-lock.json bun.lock ./
+
+# Install dependencies
 RUN bun install
 
-# Copy source
+# Copy the rest of the application code
 COPY . .
 
+# Expose the API port
 EXPOSE 3000
+
+# Start the server
 CMD ["bun", "run", "start"]
