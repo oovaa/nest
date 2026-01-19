@@ -6,7 +6,7 @@ import { RmqService } from './rmq.service';
 @Module({
   imports: [
     ClientsModule.register([
-      { 
+      {
         name: 'RMQ_SERVICE',
         transport: Transport.RMQ,
         options: {
@@ -15,6 +15,7 @@ import { RmqService } from './rmq.service';
           queueOptions: {
             durable: false,
           },
+          noAck: false,
         },
       },
     ]),

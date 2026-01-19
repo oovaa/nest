@@ -9,7 +9,7 @@ export class ProducerService {
   ) {}
 
   // 1. Run this method every 900 milliseconds
-  @Interval(900)
+  @Interval(4000)
   sendHeartbeat() {
     const payload = {
       timestamp: new Date().toISOString(),

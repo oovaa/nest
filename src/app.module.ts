@@ -28,7 +28,6 @@ import { RmqModule } from './rmq/rmq.module';
         options: {
           urls: [process.env.RABBITMQ_URL!],
           queue: 'sse_stream_queue',
-          noAck: false,
           queueOptions: {
             durable: false,
           },
@@ -39,6 +38,6 @@ import { RmqModule } from './rmq/rmq.module';
     RmqModule,
   ],
   controllers: [],
-  // providers: [ProducerService],
+  providers: [ProducerService],
 })
 export class AppModule {}

@@ -1,6 +1,9 @@
 import { Controller } from '@nestjs/common';
 import { EventPattern, Payload } from '@nestjs/microservices';
 import { RmqService } from './rmq.service';
+
+
+
 @Controller('rmq')
 export class RmqController {
   constructor(private readonly rmqService: RmqService) {}
