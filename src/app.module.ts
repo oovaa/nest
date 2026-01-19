@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ProducerService } from './producer/producer.service';
+import { RmqModule } from './rmq/rmq.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -27,14 +28,17 @@ import { ProducerService } from './producer/producer.service';
         options: {
           urls: [process.env.RABBITMQ_URL!],
           queue: 'sse_stream_queue',
+          noAck: false,
           queueOptions: {
             durable: false,
           },
         },
       },
     ]),
+
+    RmqModule,
   ],
   controllers: [],
-  providers: [ProducerService],
+  // providers: [ProducerService],
 })
 export class AppModule {}
