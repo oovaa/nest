@@ -9,6 +9,8 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ProducerService } from './producer/producer.service';
 import { RmqModule } from './rmq/rmq.module';
+import { getRmqConfig } from 'src/rmq.conf';
+import { CarsqModule } from './carsq/carsq.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -21,23 +23,18 @@ import { RmqModule } from './rmq/rmq.module';
     ScheduleModule.forRoot(),
 
     // 2. Configure the client to SEND messages
-    ClientsModule.register([
-      {
-        name: 'RABBITMQ_SERVICE', // Injection token
-        transport: Transport.RMQ,
-        options: {
-          urls: [process.env.RABBITMQ_URL!],
-          queue: 'sse_stream_queue',
-          queueOptions: {
-            durable: false,
-          },
-        },
-      },
-    ]),
+    // ClientsModule.register([
+    //   {
+    //     name: 'RABBITMQ_SERVICE', // Injection token
+    //     ...getRmqConfig(),
+    //   },
+    // ]),
 
-    RmqModule,
+    // RmqModule,
+
+    CarsqModule,
   ],
   controllers: [],
-  providers: [ProducerService],
+  // providers: [ProducerService],
 })
 export class AppModule {}

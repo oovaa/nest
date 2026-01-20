@@ -1,14 +1,9 @@
 import { Controller } from '@nestjs/common';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
-import { RmqService } from './rmq.service';
+// import { RmqService } from 'src/rmq/rmq.service';
 
-@Controller('rmq')
-export class RmqController {
-  constructor(private readonly rmqService: RmqService) {}
-  @EventPattern('my_topic')
-  handleUserCreated(@Payload() data: any, @Ctx() context: RmqContext) {
-    this.rmqService.handleRMQ(data);
-  }
+@Controller('carsq')
+export class CarsqController {
 
   // 👇 Add this handler to fix the error properly
   @EventPattern('my_cars')
