@@ -9,12 +9,4 @@ export class RmqController {
   handleUserCreated(@Payload() data: any, @Ctx() context: RmqContext) {
     this.rmqService.handleRMQ(data);
   }
-
-  // 👇 Add this handler to fix the error properly
-  @EventPattern('my_cars')
-  handleCars(@Payload() data: any, @Ctx() context: RmqContext) {
-    console.log('Car received:', data);
-    // If you turned off auto-ack, remember to ack!
-    // context.getChannelRef().ack(context.getMessage());
-  }
 }

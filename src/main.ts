@@ -5,10 +5,11 @@ import { getRmqConfig } from 'src/rmq.conf';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Connect the RabbitMQ microservice
-  app.connectMicroservice<MicroserviceOptions>({
-    ...getRmqConfig(),
-  });
+  // Connect the RMQ microservice
+  app.connectMicroservice<MicroserviceOptions>(getRmqConfig('rmq_queue'));
+
+  // Connect the Cars microservice
+  app.connectMicroservice<MicroserviceOptions>(getRmqConfig('cars'));
 
   // Start microservices along with the HTTP server
   await app.startAllMicroservices();
