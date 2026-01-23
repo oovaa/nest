@@ -11,7 +11,7 @@ export class RmqService {
     console.log('data received', data);
   }
   eui = randomUUID();
-  @Interval(4000)
+  @Interval(900)
   sendHeartbeat() {
     const payload = {
       eui: this.eui,
