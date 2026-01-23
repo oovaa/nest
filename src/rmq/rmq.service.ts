@@ -26,6 +26,6 @@ export class RmqService {
 
     console.log('⚡ Sending message to RabbitMQ (rmq_queue)...', payload);
 
-    this.client.emit('my_topic', payload);
+    this.client.emit('iot', payload);
   }
 }

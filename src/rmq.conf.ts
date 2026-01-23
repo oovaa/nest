@@ -1,6 +1,6 @@
 import { RmqOptions, Transport } from '@nestjs/microservices';
 
-export function getRmqConfig(queue = 'sse_stream_queue'): RmqOptions {
+export function getRmqConfig(queue = 'iot'): RmqOptions {
   return {
     transport: Transport.RMQ,
     options: {
