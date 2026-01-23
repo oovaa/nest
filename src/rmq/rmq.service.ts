@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { Interval } from '@nestjs/schedule';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class RmqService {
@@ -9,16 +10,21 @@ export class RmqService {
   handleRMQ(data) {
     console.log('data received', data);
   }
-
+  eui = randomUUID();
   @Interval(4000)
   sendHeartbeat() {
     const payload = {
-      timestamp: new Date().toISOString(),
-      message: 'Automatic heartbeat message from RmqService',
-      id: Math.floor(Math.random() * 1000),
+      eui: this.eui,
+      beacons: [
+        { eui: randomUUID(), rssi: -59 },
+        { eui: randomUUID(), rssi: -59 },
+        { eui: randomUUID(), rssi: -59 },
+        { eui: randomUUID(), rssi: -59 },
+      ],
+      timestamp: Date.now(),
     };
 
-    console.log('⚡ Sending message to RabbitMQ (rmq_queue)...');
+    console.log('⚡ Sending message to RabbitMQ (rmq_queue)...', payload);
 
     this.client.emit('my_topic', payload);
   }
