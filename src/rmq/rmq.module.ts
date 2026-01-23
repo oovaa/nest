@@ -8,7 +8,7 @@ import { getRmqConfig } from 'src/rmq.conf';
     ClientsModule.register([
       {
         name: 'RMQ_SERVICE',
-        ...getRmqConfig('rmq_queue'),
+        ...getRmqConfig(),
       },
     ]),
   ],
