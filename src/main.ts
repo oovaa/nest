@@ -6,10 +6,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // Connect the RMQ microservice
-  app.connectMicroservice<MicroserviceOptions>(getRmqConfig('rmq_queue'));
+  // app.connectMicroservice<MicroserviceOptions>(getRmqConfig('rmq_queue'));
 
   // Connect the Cars microservice
-  app.connectMicroservice<MicroserviceOptions>(getRmqConfig('cars'));
+  // app.connectMicroservice<MicroserviceOptions>(getRmqConfig('cars'));
 
   // Start microservices along with the HTTP server
   await app.startAllMicroservices();

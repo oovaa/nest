@@ -7,7 +7,6 @@ import { CatagoriesModule } from './catagories/catagories.module';
 import { AuthModule } from './auth/auth.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { RmqModule } from './rmq/rmq.module';
-import { CarsqModule } from './carsq/carsq.module';
 
 @Module({
   imports: [
@@ -19,7 +18,6 @@ import { CarsqModule } from './carsq/carsq.module';
     AuthModule,
     ScheduleModule.forRoot(),
     RmqModule,
-    CarsqModule,
   ],
   controllers: [],
   providers: [],
