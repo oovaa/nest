@@ -15,8 +15,8 @@ services:
     container_name: nest_rabbitmq
     image: rabbitmq:3-management
     environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_USER: iot
+      RABBITMQ_DEFAULT_PASS: iot
     ports:
       - "5672:5672"   # App connection port
       - "15672:15672" # Management UI port
