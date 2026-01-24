@@ -32,7 +32,7 @@ services:
       RABBITMQ_URL: amqp://iot:iot@rabbitmq:5672
       NODE_ENV: production
     ports:
-      - "3000:3000"
+      - "3000:3001"
     depends_on:
       - db
       - rabbitmq
