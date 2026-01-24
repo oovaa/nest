@@ -13,6 +13,6 @@ async function bootstrap() {
 
   // Start microservices along with the HTTP server
   await app.startAllMicroservices();
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 3001);
 }
 bootstrap();

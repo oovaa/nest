@@ -29,7 +29,7 @@ services:
     environment:
       DATABASE_URL: postgres://omar:123@db:5432/iot
       # FIX: Point to the 'rabbitmq' container, not localhost
-      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+      RABBITMQ_URL: amqp://iot:iot@rabbitmq:5672
       NODE_ENV: production
     ports:
       - "3000:3000"

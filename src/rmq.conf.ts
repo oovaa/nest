@@ -5,7 +5,7 @@ export function getRmqConfig(queue = 'iot'): RmqOptions {
     transport: Transport.RMQ,
     options: {
       urls: [
-        process.env.RABBITMQ_URL || 'amqp://guest:guest@142.93.134.175:5672',
+        process.env.RABBITMQ_URL || 'amqp://iot:iot@142.93.134.175:5672',
       ],
       queue: queue,
       queueOptions: {
